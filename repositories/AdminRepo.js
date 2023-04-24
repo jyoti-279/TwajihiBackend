@@ -1,17 +1,17 @@
 const sequelize = require('../config/dbConfig').sequelize;
 var {DataTypes} = require('sequelize');
 
-const User = require('../models/users')(sequelize, DataTypes);
+const Admin = require('../models/admins')(sequelize, DataTypes);
 
-// const tokens = require('../models/user_fcm_tokens')(sequelize, DataTypes);
-
-
+// const tokens = require('../models/Admin_fcm_tokens')(sequelize, DataTypes);
 
 
-// Create User
+
+
+// Create Admin
 module.exports.create = (data) => {
     return new Promise((resolve, reject) => {
-        User.create(data).then(result => {
+        Admin.create(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -22,7 +22,7 @@ module.exports.create = (data) => {
 
 module.exports.count = (data) => {
     return new Promise((resolve, reject) => {
-        User.count(data).then(result => {
+        Admin.count(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -33,7 +33,7 @@ module.exports.count = (data) => {
 
 module.exports.findOne = (data) => {
     return new Promise((resolve, reject) => {
-        User.findOne(data).then(result => {
+        Admin.findOne(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -45,7 +45,7 @@ module.exports.findOne = (data) => {
 
 module.exports.findAll = (data) => {
     return new Promise((resolve, reject) => {
-        User.findAll(data).then(result => {
+        Admin.findAll(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -57,7 +57,7 @@ module.exports.findAll = (data) => {
 
 module.exports.findAndCountAll = (data) => {
     return new Promise((resolve, reject) => {
-        User.findAndCountAll(data).then(result => {
+        Admin.findAndCountAll(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -74,7 +74,7 @@ module.exports.update = (where, data, t = null) => {
             }
             //if trunsaction exist
         if (t != null) options.transaction = t;
-        User.update(data, options).then((result) => {
+        Admin.update(data, options).then((result) => {
             resolve(result)
         }).catch((err) => {
             reject(err);
@@ -84,7 +84,7 @@ module.exports.update = (where, data, t = null) => {
 
 module.exports.delete = (where) => {
     return new Promise((resolve, reject) => {
-        User.destroy({where:where}).then(result => {
+        Admin.destroy({where:where}).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -92,4 +92,3 @@ module.exports.delete = (where) => {
         })
     })
 }
-

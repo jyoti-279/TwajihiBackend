@@ -1,7 +1,7 @@
 // ################################ NPM Packages ################################ //
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const firebase = require("firebase-admin");
+// const firebase = require("firebase-admin");
 //const UserRepo = require('../repositories/UserFcmTokenRepositories');
 
 

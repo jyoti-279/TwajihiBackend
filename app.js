@@ -51,7 +51,7 @@ global.constants = require(global.appPath + '/config/constants');
 
 
 var apiRouter   = require('./routes/apiRoutes');
-// var adminRouter   = require('./routes/adminRoutes');
+var adminRouter   = require('./routes/adminRoutes');
 
 
 // Socket Configuration
@@ -110,7 +110,7 @@ app.use(InterceptorForAllResponse);
 
 //------------------------------------------- ROUTES ----------------------------------------------//
  app.use('/api', apiRouter); // API Routes
-// app.use('/admin', adminRouter); // ADMIN Routes
+ app.use('/admin', adminRouter); // ADMIN Routes
 //------------------------------------------- ROUTES ----------------------------------------------//
 
 // catch 404 and forward to error handler
