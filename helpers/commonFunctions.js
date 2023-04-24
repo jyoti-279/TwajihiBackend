@@ -61,7 +61,15 @@ const transportOptions = ({
     }
   });
 
-
+//   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+//   const transportOptions = {
+//       host: process.env.MAIL_HOST,
+//       port: process.env.MAIL_PORT,
+//       auth: {
+//           user: process.env.MAIL_USERNAME,
+//           pass: process.env.MAIL_PASSWORD
+//       }
+//   }
 //Send Mail
 module.exports.sendMail = (messageData) => {
     return new Promise((resolve, reject) => {
