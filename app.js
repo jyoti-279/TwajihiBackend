@@ -5,7 +5,7 @@ var path        = require('path');
 var fs = require('fs');
 
 var app = express();
-require('dotenv').config({path: __dirname + '/.env'})
+require('dotenv').config({path: __dirname + './.env'})
 
 //var socket = require("socket.io")
 
