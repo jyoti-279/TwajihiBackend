@@ -6,7 +6,9 @@ module.exports = {
     profileDetails: "Your profile details has been added successfully",
     fetchprofileDetails: "Your profile details fetch successfully",
     invalidCreds: "Invalid credentials",
-    userProfileUpdate: "Admin profile updated successfully",
+    userProfileUpdate: " profile updated successfully",
+    ProfileDetails: " Fetch profile Details successfully",
+    porofileImageUpdate: "Profile image updated successfully",
     notificationListRead: "Notification read successfully",
     invalidEmail: "Invalid Email Address ",
     passwordreset: "password reset successfully",
@@ -25,11 +27,13 @@ module.exports = {
     privacypolicy: "Privacy Policy updated successfully",
     refundypolicy: "Refund Policy updated successfully",
     updateCmsContent: "Content update successfully",
-   
     aboutUs: "About Us Updated Successfully",
     addNewAddvertisement: "Added new Advertisement successfully",
     updateAdvertisement: "Advertisement Updated Successfully",
     fetchAvertisement:"Fetch Advertisement Successfully",
     aboutusImage: "Image Updated Successfully",
     PaswordInvalid: "Pasword Invalid",
+    changePassword: "Password Changed Successfully",
+    userNotFound: "User Not Found",
+
 }
