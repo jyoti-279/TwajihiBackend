@@ -32,4 +32,13 @@ module.exports = {
     fetchAvertisement:"Fetch Advertisement Successfully",
     aboutusImage: "Image Updated Successfully",
     PaswordInvalid: "Pasword Invalid",
+
+    createCategory: "Category added successfully",
+    createSubCategory: "Sub category added successfully",
+    updateCategory: "Category update successfully",
+    updateSubCategory: "Sub Category updated Successfully",
+    categoryDetails: "Fetched category details successfully",
+
+    examDetails:"Exam Details"
+   
 }
