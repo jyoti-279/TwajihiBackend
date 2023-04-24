@@ -39,6 +39,7 @@ module.exports.findAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
         Questions.findAll({
             where: whereData,
+            attributes:['id','exam_id','question_name','question_type','answer_one','answer_two','answer_three','answer_four']
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);

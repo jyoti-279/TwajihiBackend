@@ -73,6 +73,9 @@ module.exports.findAndCountAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
         Exams.findAndCountAll({
             where: whereData,
+            offset: data.offset,
+            limit: data.limit,
+            order: data.order,
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);

@@ -41,8 +41,9 @@ module.exports = {
     categoryDetails: "Fetched category details successfully",
 
     examDetails:"Exam Details",
-   
+    examList:"Exam List",
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
+    questionsSubmit: "Exam submitted successfully"
 
 }

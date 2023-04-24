@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   questions.init({
+    exam_id: DataTypes.INTEGER,
     question_name: DataTypes.STRING,
     question_type: DataTypes.ENUM('1', '2', '3', '4'),
     answer_one: DataTypes.STRING,

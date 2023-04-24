@@ -46,7 +46,10 @@ router.post('/update-profile-picture',AuthenticationMiddleware.authenticateReque
 router.get('/profile-details',AuthenticationMiddleware.authenticateRequestAPI,ProfileController.ProfileDetails);
 
 // ######################## Take Test #######################
-router.get('/exam-details/:subject_id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.examDetails);
+router.get('/exam-list/:id',AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.listUserSchema,'query'),ExamController.examList);
+router.get('/exam-details/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.examDetails);
+router.get('/question-list/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.questionsList);
+router.post('/submit-exam', AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.submitExam, 'body'), ExamController.submitExam); // Submit exam
 
 
 module.exports = router;
