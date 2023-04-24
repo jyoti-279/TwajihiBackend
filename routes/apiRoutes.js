@@ -22,7 +22,7 @@ var uploadProfileImage = multer({ storage: storageProfileImage });
 // ################################# controllers #################################
 const AuthenticationController = require('../controllers/User/AuthenticationController');
 const ProfileController = require('../controllers/User/ProfileController');
-
+const SettingsController = require('../controllers/User/SettingController');
 // ################################# Joi  Validation Schema #################################
 const UserValidation = require('../validation-schemas/User/userValidationSchema');
 
@@ -43,5 +43,11 @@ router.put('/update-profile',AuthenticationMiddleware.authenticateRequestAPI,val
 router.put('/change-password',AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.ChangePasswordSchema,'body'),ProfileController.changePassword);
 router.post('/update-profile-picture',AuthenticationMiddleware.authenticateRequestAPI,uploadProfileImage.single('image'),ProfileController.profileImageUpdate);
 router.get('/profile-details',AuthenticationMiddleware.authenticateRequestAPI,ProfileController.ProfileDetails);
+
+// ####################### settings #######################
+
+router.get('/catagory-list',SettingsController.CatagoryList);
+router.get('/subcatagory-list/:catagory_id',SettingsController.SubCatagoryList);
+
 
 module.exports = router;

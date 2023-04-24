@@ -20,11 +20,11 @@ const ResponseMessages = require('../../ResponseMessages');
 
 /*
 |------------------------------------------------ 
-| API name          :  updateProfile
+| API name          :  ProfileDetails
 | Response          :  Respective response message in JSON format
-| Logic             :  Update User Profile
+| Logic             :  ProfileDetails
 | Request URL       :  BASE_URL/api/
-| Request method    :  PUT
+| Request method    :  GET
 | Author            :  SAYAN DE
 |------------------------------------------------
 */

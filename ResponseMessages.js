@@ -35,5 +35,7 @@ module.exports = {
     PaswordInvalid: "Pasword Invalid",
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
+    catagoryList: "Fetch Category List Successfully",
+    SubcatagoryList: "Fetch SubCategory List Successfully",
 
 }
