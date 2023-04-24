@@ -55,7 +55,6 @@ module.exports.Registeration = (req, res) => {
                 let refreshToken      = jwt.sign({ user_id: createResponse.id, email: createResponse.email }, jwtOptionsRefresh.secret, jwtOptionsRefresh.options);
                 createResponse['access_token'] = accessToken;
                 createResponse['refresh_token'] = refreshToken;
-
                 // if(body.user_type == 0){
                 //     message = `${body.full_name} has registered as user`
                 // }
