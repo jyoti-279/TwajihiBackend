@@ -10,16 +10,15 @@
  * Module dependencies.
  * @private
  */
-const sequelize = require('../../config/dbConfig').sequelize;
+// const sequelize = require('../../config/dbConfig').sequelize;
 var {DataTypes} = require('sequelize');
 
-const UserRepo = require('../repositories/AuthenticationRepo');
+const UserRepo = require('../../repositories/AuthenticationRepo');
 
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const ResponseMessages = require('../../ResponseMessages');
 const commonFunction = require('../../helpers/commonFunctions');
-const NotificationsRepo = require('../../repositories/NotificationRepo');
 
 
 const jwtOptionsAccess = global.constants.jwtAccessTokenOptions;

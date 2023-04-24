@@ -3,7 +3,7 @@ var {DataTypes} = require('sequelize');
 
 const User = require('../models/users')(sequelize, DataTypes);
 
-const tokens = require('../models/user_fcm_tokens')(sequelize, DataTypes);
+// const tokens = require('../models/user_fcm_tokens')(sequelize, DataTypes);
 
 
 

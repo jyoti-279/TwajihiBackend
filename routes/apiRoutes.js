@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const AuthenticationController = require('../controllers/AuthenticationController');
+const AuthenticationController = require('../controllers/User/AuthenticationController');
 
 router.post('/registration',AuthenticationController.Registeration);
 
