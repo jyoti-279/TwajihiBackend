@@ -46,5 +46,6 @@ module.exports = {
     userNotFound: "User Not Found",
     catagoryList: "Fetch Category List Successfully",
     SubcatagoryList: "Fetch SubCategory List Successfully",
+    catagoryImageUpload: "Category Image Upload Successfully",
 
 }

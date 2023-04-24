@@ -23,6 +23,7 @@ var uploadProfileImage = multer({ storage: storageProfileImage });
 const AuthenticationController = require('../controllers/User/AuthenticationController');
 const ProfileController = require('../controllers/User/ProfileController');
 const ExamController = require('../controllers/User/ExamController');
+const SettingController = require('../controllers/User/SettingController');
 
 // ################################# Joi  Validation Schema #################################
 const UserValidation = require('../validation-schemas/User/userValidationSchema');
@@ -44,6 +45,10 @@ router.put('/update-profile',AuthenticationMiddleware.authenticateRequestAPI,val
 router.put('/change-password',AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.ChangePasswordSchema,'body'),ProfileController.changePassword);
 router.post('/update-profile-picture',AuthenticationMiddleware.authenticateRequestAPI,uploadProfileImage.single('image'),ProfileController.profileImageUpdate);
 router.get('/profile-details',AuthenticationMiddleware.authenticateRequestAPI,ProfileController.ProfileDetails);
+
+// ####################### Setting  #######################
+router.get('/catagory-list',SettingController.CatagoryList);
+router.get('/subcatagory-list/:catagory_id',SettingController.SubCatagoryList);
 
 // ######################## Take Test #######################
 router.get('/exam-details/:subject_id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.examDetails);

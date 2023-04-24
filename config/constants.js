@@ -1,8 +1,8 @@
 require('dotenv').config();
 module.exports = {
     allowMimeType: ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4', 'image/svg'],
-    // product_image_url: process.env.HOST_URL + '/uploads/productImage',
-    // donate_product_image_url: process.env.HOST_URL + '/uploads/DonateProductsImages',
+    catagory_image_url: process.env.HOST_URL + '/uploads/CatagoryImage',
+    subcatagory_image_url: process.env.HOST_URL + '/uploads/SubCatagoryImage',
     profile_photo_url: process.env.HOST_URL + '/uploads/ProfileImage',
     // aboutus_photo_url: process.env.HOST_URL + '/uploads/AboutUsImages',
     // charity_photo_url: process.env.HOST_URL + '/uploads/CharityProfileImage',

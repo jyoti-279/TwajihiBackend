@@ -4,6 +4,21 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// SET STORAGE Images
+var storageCatagoryImage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        const path = 'uploads/CatagoryImage';
+        fs.mkdirSync(path, { recursive: true });
+        cb(null, path);
+    },
+    filename: function(req, file, cb) {
+        cb(null, 'CatagoryImage' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+var uploadCatagoryImage = multer({ storage: storageCatagoryImage });
+
+
 /* ############################################ Middlewares ############################################ */
 const validateRequest = require('../middlewares/ValidateRequest');
 const authenticationMiddleware = require('../middlewares/AuthenticationMiddleware');
@@ -35,7 +50,7 @@ router.get('/category-list', authenticationMiddleware.authenticateAdminRequestAP
 router.post('/create-category', validateRequest.validate(adminValidationSchema.catgorySchema, 'body'), SettingsController.createCategory); // User Category
 router.put('/update-category/:id', validateRequest.validate(adminValidationSchema.catgorySchema, 'body'), SettingsController.updateCategory); // User Category
 router.post('/create-sub-category', authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.subCatgorySchema, 'body'), SettingsController.createSubCategory); // Fetch User List
-
+router.post('/upload-category-image/:id', authenticationMiddleware.authenticateAdminRequestAPI, uploadCatagoryImage.single('image'),SettingsController.uploadCatagoryImage);
 
 
 

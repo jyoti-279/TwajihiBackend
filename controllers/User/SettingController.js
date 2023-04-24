@@ -13,15 +13,18 @@
 // const sequelize = require('../../config/dbConfig').sequelize;
 var {DataTypes} = require('sequelize');
 
-const SettingRepo = require('../../repositories/SettingsRepo');
+
+const subCategoryRepo = require('../../repositories/SubCategoryRepo');
+const categoryRepo = require('../../repositories/CategoryRepo');
+
 const ResponseMessages = require('../../ResponseMessages');
 
 /*
 |------------------------------------------------ 
-| API name          :  ProfileDetails
+| API name          :  CatagoryList
 | Response          :  Respective response message in JSON format
-| Logic             :  ProfileDetails
-| Request URL       :  BASE_URL/api/
+| Logic             :  CatagoryList
+| Request URL       :  BASE_URL/api/catagory-list
 | Request method    :  GET
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -30,7 +33,7 @@ module.exports.CatagoryList = (req, res) => {
     (async () => {
       let purpose = "Catagory List ";
       try {
-        let catagoryList = await SettingRepo.findAllCatagory({});
+        let catagoryList = await categoryRepo.findAll({});
         console.log(catagoryList, "det ################");
         return res.send({
           status: 200,
@@ -52,10 +55,10 @@ module.exports.CatagoryList = (req, res) => {
 
 /*
 |------------------------------------------------ 
-| API name          :  ProfileDetails
+| API name          :  SubCatagoryList
 | Response          :  Respective response message in JSON format
-| Logic             :  ProfileDetails
-| Request URL       :  BASE_URL/api/
+| Logic             :  SubCatagoryList
+| Request URL       :  BASE_URL/api/subcatagory-list/:catagory_id
 | Request method    :  GET
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -65,7 +68,7 @@ module.exports.SubCatagoryList = (req, res) => {
       let purpose = "Sub Catagory List ";
       try {
         let id = req.params.catagory_id;
-        let SubcagoryList = await SettingRepo.findAllSubCatagory({ category_id: id });
+        let SubcagoryList = await subCategoryRepo.findAll({ category_id: id });
         console.log(SubcagoryList, " ################");
         return res.send({
           status: 200,
