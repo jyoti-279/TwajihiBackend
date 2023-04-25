@@ -31,17 +31,15 @@ module.exports.CreateUserSchema = Joi.object().keys({
 // login validation 
 module.exports.loginSchema = Joi.object().keys({
     email: Joi.string().email().required().messages({'any.required': `"email" is a required field`}),
-    password: Joi.string()
-        .min(6)
-        .required()
-        .messages({
-            'string.min': `"Password" should have a minimum length of 6 charecters`,
-        }),
-    confirm_password: Joi.string().valid(Joi.ref('password')).required()
-        .messages({
-            'any.only': `"Confirm Password" should match with "Password"`
-        }),
-}).with('password', 'confirm_password');
+    password: Joi.string().min(6).required(),
+})
+
+
+// Submit Exam Schema
+module.exports.submitExam = Joi.object().keys({
+    exam_id: Joi.number().required(),
+    questions_answers: Joi.array().required()
+});
 
 // forget password validation 
 module.exports.forgetPasswordSchema = Joi.object().keys({
@@ -94,3 +92,10 @@ module.exports.ChangePasswordSchema = Joi.object().keys({
 
 }).with('new_password', 'confirm_password');
 
+
+// List User Schema
+module.exports.listUserSchema = Joi.object().keys({
+    page: Joi.number().min(1).required(),
+  
+   
+});
