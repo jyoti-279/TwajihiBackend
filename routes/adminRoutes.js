@@ -4,6 +4,21 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// SET STORAGE Images
+var storageCatagoryImage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        const path = 'uploads/CatagoryImage';
+        fs.mkdirSync(path, { recursive: true });
+        cb(null, path);
+    },
+    filename: function(req, file, cb) {
+        cb(null, 'CatagoryImage' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+var uploadCatagoryImage = multer({ storage: storageCatagoryImage });
+
+
 /* ############################################ Middlewares ############################################ */
 const validateRequest = require('../middlewares/ValidateRequest');
 const authenticationMiddleware = require('../middlewares/AuthenticationMiddleware');
@@ -28,14 +43,17 @@ router.get('/users-list', authenticationMiddleware.authenticateAdminRequestAPI, 
 router.post('/create-exam',authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.examSchema, 'body'), ExamsController.createExam)// Create Exam
 router.get('/exams-list', authenticationMiddleware.authenticateAdminRequestAPI,validateRequest.validate(adminValidationSchema.listUserSchema, 'query'), ExamsController.listExam)// Create Exam
 router.get('/exams-details/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.examDetails)// Exam Details
-
+router.delete('/delete-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.deleteExam);
+router.put('/update-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.updateExam);
+router.post('/add-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.AddQuestions);
+router.put('/update-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.updateQuestion);
 
 // ####################################### Settings ########################################## //
 router.get('/category-list', authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.listUserSchema, 'query'), SettingsController.listCategories); // Fetch User List
 router.post('/create-category', validateRequest.validate(adminValidationSchema.catgorySchema, 'body'), SettingsController.createCategory); // User Category
 router.put('/update-category/:id', validateRequest.validate(adminValidationSchema.catgorySchema, 'body'), SettingsController.updateCategory); // User Category
 router.post('/create-sub-category', authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.subCatgorySchema, 'body'), SettingsController.createSubCategory); // Fetch User List
-
+router.post('/upload-category-image/:id', authenticationMiddleware.authenticateAdminRequestAPI, uploadCatagoryImage.single('image'),SettingsController.uploadCatagoryImage);
 
 
 //######################################### Dashboard #####################################

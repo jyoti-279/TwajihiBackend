@@ -95,3 +95,15 @@ module.exports.findAndCountAll = (whereData, data) => {
         })
     })
 }
+
+// delete
+module.exports.delete = (where) => {
+    return new Promise((resolve, reject) => {
+        Exams.destroy({where:where}).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}

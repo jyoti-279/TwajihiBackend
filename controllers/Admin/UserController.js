@@ -18,7 +18,7 @@ const UserRepositories = require('../../repositories/UserRepo');
 const sequelize = require('../../config/dbConfig').sequelize;
 
 // ################################ Response Messages ################################ //
-const responseMessages = require('../../responseMessages');
+const responseMessages = require('../../ResponseMessages');
 
 // ################################ NPM Packages ################################ //
 const md5 = require('md5');

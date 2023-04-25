@@ -18,11 +18,12 @@ const questionsRepo = require('../../repositories/QuestionsRepo');
 const examCondutedRepo = require('../../repositories/ExamConductedUserRepo');
 const examSheetsRepo = require('../../repositories/ExamSheetsRepo');
 
+const moment = require("moment");
 // ################################ Sequelize ################################ //
 const sequelize = require('../../config/dbConfig').sequelize;
 
 // ################################ Response Messages ################################ //
-const responseMessages = require('../../responseMessages');
+const responseMessages = require('../../ResponseMessages');
 const exams = require('../../models/exams');
 
 /*
@@ -438,6 +439,50 @@ module.exports.viewAnswer = (req, res) => {
             })
         } catch (err) {
             console.log("Answer Result List ERROR : ", err);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+
+
+/*
+|------------------------------------------------ 
+| API name          :  previousExams
+| Response          :  Respective response message in JSON format
+| Logic             :  previousExams
+| Request URL       :  BASE_URL/
+| Request method    :  GET
+| Author            :  
+|------------------------------------------------
+*/
+module.exports.previousExams = (req, res) => {
+    (async () => {
+        let purpose = "Questions List"
+        try {
+
+            let questions = [];
+            let where = { exam_year: {$lt: moment().format('YYYY')}};
+                let questionsList = await examsRepo.findAll(where);
+                questionsList.forEach(element => {
+                    questions.push(element)
+                    
+                });
+
+                return res.status(200).json({
+                    status: 200,
+                    msg: responseMessages.examList,
+                    data: {questions: questions},
+                    purpose: purpose
+                })
+        } catch (err) {
+            console.log("Questions List ERROR : ", err);
+
             return res.status(500).send({
                 status: 500,
                 msg: responseMessages.serverError,

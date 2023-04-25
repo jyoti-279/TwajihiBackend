@@ -18,7 +18,8 @@ const categoryRepo = require('../../repositories/CategoryRepo');
 const sequelize = require('../../config/dbConfig').sequelize;
 
 // ################################ Response Messages ################################ //
-const responseMessages = require('../../responseMessages');
+const responseMessages = require('../../ResponseMessages');
+const ResponseMessages = require('../../ResponseMessages');
 
 
 /*
@@ -315,4 +316,50 @@ module.exports.updateSubCategory = (req, res) => {
     })()
 }
 
-
+/*
+|------------------------------------------------ 
+| API name          :  uploadCatagoryImage
+| Response          :  Respective response message in JSON format
+| Logic             :  Update Profile Image
+| Request URL       :  BASE_URL/api/update-profile-image
+| Request method    :  PUT
+| Author            :  SAYAN DE
+|------------------------------------------------
+*/
+module.exports.uploadCatagoryImage = (req, res) => {
+    (async () => {
+      let purpose = "Catagory Image Upload";
+      try {
+        let id = req.params.id;
+        let Image;
+        
+        if (req.file) {
+          Image = `${global.constants.catagory_image_url}/${req.file.filename}`;
+        }
+        let count = await categoryRepo.count({ id: id });
+        if (count < 1) {
+          let create = {
+            category_image: Image
+          }
+          await categoryRepo.create({ id: id });
+          await categoryRepo.update({ id: id }, create);
+        } else {
+          await categoryRepo.update({ id: id }, { category_image: Image });
+        }
+        return res.send({
+          status: 200,
+          msg: ResponseMessages.catagoryImageUpload,
+          data: Image,
+          purpose: purpose,
+        });
+      } catch (err) {
+        console.log("Image Profile ERROR : ", err);
+        return res.send({
+          status: 500,
+          msg: ResponseMessages.serverError,
+          data: {},
+          purpose: purpose,
+        });
+      }
+    })();
+  };

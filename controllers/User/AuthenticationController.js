@@ -29,7 +29,7 @@ const jwtOptionsRefresh = global.constants.jwtRefreshTokenOptions;
 | API name          :  REGISTRATION 
 | Response          :  Respective response message in JSON format
 | Logic             :  REGISTRATION
-| Request URL       :  BASE_URL/api/
+| Request URL       :  BASE_URL/api/registration
 | Request method    :  POST
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -108,7 +108,7 @@ module.exports.registeration = (req, res) => {
 | API name          :  Login
 | Response          :  Respective response message in JSON format
 | Logic             :  Login
-| Request URL       :  BASE_URL/api/
+| Request URL       :  BASE_URL/api/login
 | Request method    :  POST
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -184,7 +184,7 @@ module.exports.login = (req, res) => {
 | API name          :  FORGET PASSWORD 
 | Response          :  Respective response message in JSON format
 | Logic             :  FORGET PASSWORD
-| Request URL       :  BASE_URL/api/
+| Request URL       :  BASE_URL/api/forget-password
 | Request method    :  POST
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -257,8 +257,8 @@ module.exports.forgetPassword = (req, res) => {
 |------------------------------------------------ 
 | API name          :  RESET PASSWORD 
 | Response          :  Respective response message in JSON format
-| Logic             :  UPDATE PASSWORD
-| Request URL       :  BASE_URL/api/
+| Logic             :  RESET PASSWORD
+| Request URL       :  BASE_URL/api/reset-password
 | Request method    :  POST
 | Author            :  SAYAN DE
 |------------------------------------------------

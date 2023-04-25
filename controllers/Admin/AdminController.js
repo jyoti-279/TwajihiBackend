@@ -20,7 +20,7 @@ const examsRepo = require('../../repositories/ExamsRepo');
 const sequelize = require('../../config/dbConfig').sequelize;
 
 // ################################ Response Messages ################################ //
-const responseMessages = require('../../responseMessages');
+const responseMessages = require('../../ResponseMessages');
 
 
 // ################################ NPM Packages ################################ //

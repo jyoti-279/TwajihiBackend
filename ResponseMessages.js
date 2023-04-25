@@ -28,9 +28,6 @@ module.exports = {
     refundypolicy: "Refund Policy updated successfully",
     updateCmsContent: "Content update successfully",
     aboutUs: "About Us Updated Successfully",
-    addNewAddvertisement: "Added new Advertisement successfully",
-    updateAdvertisement: "Advertisement Updated Successfully",
-    fetchAvertisement:"Fetch Advertisement Successfully",
     aboutusImage: "Image Updated Successfully",
     PaswordInvalid: "Pasword Invalid",
 
@@ -43,7 +40,15 @@ module.exports = {
     examDetails:"Exam Details",
     examResultDetails:"Exam result details",
     examResultList:"Exam result list",
+    examDelete:"Exam Deleted Successfully",
+    examUpdate:"Exam Updated Successfully",
     examList:"Exam List",
+    createExam: "Exam Create Successfully",
+    createQuestions: "Questions Added Successfully",
+    updateQuestions: "Questions Updated Successfully",
+
+
+
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
     questionsSubmit: "Exam submitted successfully",

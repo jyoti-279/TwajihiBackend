@@ -20,11 +20,11 @@ const ResponseMessages = require('../../ResponseMessages');
 
 /*
 |------------------------------------------------ 
-| API name          :  updateProfile
+| API name          :  ProfileDetails
 | Response          :  Respective response message in JSON format
-| Logic             :  Update User Profile
-| Request URL       :  BASE_URL/api/
-| Request method    :  PUT
+| Logic             :  ProfileDetails
+| Request URL       :  BASE_URL/api/profile-details
+| Request method    :  GET
 | Author            :  SAYAN DE
 |------------------------------------------------
 */
@@ -58,7 +58,7 @@ module.exports.ProfileDetails = (req, res) => {
 | API name          :  updateProfile
 | Response          :  Respective response message in JSON format
 | Logic             :  Update User Profile
-| Request URL       :  BASE_URL/api/
+| Request URL       :  BASE_URL/api/update-profile
 | Request method    :  PUT
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -110,8 +110,8 @@ module.exports.updateProfile = (req, res) => {
 |------------------------------------------------ 
 | API name          :  change Password
 | Response          :  Respective response message in JSON format
-| Logic             :  Update Password
-| Request URL       :  BASE_URL/api/
+| Logic             :  change Password
+| Request URL       :  BASE_URL/api/change-password
 | Request method    :  PUT
 | Author            :  SAYAN DE
 |------------------------------------------------
@@ -158,7 +158,7 @@ module.exports.changePassword = (req, res) => {
 | API name          :  profileImageUpdate
 | Response          :  Respective response message in JSON format
 | Logic             :  Update Profile Image
-| Request URL       :  BASE_URL/api/update-profile-image
+| Request URL       :  BASE_URL/api/update-profile-picture
 | Request method    :  PUT
 | Author            :  SAYAN DE
 |------------------------------------------------

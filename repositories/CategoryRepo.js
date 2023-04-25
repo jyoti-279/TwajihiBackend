@@ -81,3 +81,17 @@ module.exports.findAndCountAll = (whereData, data) => {
         })
     })
 }
+
+// count
+module.exports.count = (whereData, data) => {
+    return new Promise((resolve, reject) => {
+        Category.count({
+            where: whereData,
+        }).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}

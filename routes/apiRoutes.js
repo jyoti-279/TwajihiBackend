@@ -23,6 +23,7 @@ var uploadProfileImage = multer({ storage: storageProfileImage });
 const AuthenticationController = require('../controllers/User/AuthenticationController');
 const ProfileController = require('../controllers/User/ProfileController');
 const ExamController = require('../controllers/User/ExamController');
+const SettingController = require('../controllers/User/SettingController');
 
 // ################################# Joi  Validation Schema #################################
 const UserValidation = require('../validation-schemas/User/userValidationSchema');
@@ -45,6 +46,10 @@ router.put('/change-password',AuthenticationMiddleware.authenticateRequestAPI,va
 router.post('/update-profile-picture',AuthenticationMiddleware.authenticateRequestAPI,uploadProfileImage.single('image'),ProfileController.profileImageUpdate);
 router.get('/profile-details',AuthenticationMiddleware.authenticateRequestAPI,ProfileController.ProfileDetails);
 
+// ####################### Setting  #######################
+router.get('/catagory-list',SettingController.CatagoryList);
+router.get('/subcatagory-list/:catagory_id',SettingController.SubCatagoryList);
+
 // ######################## Take Test #######################
 router.get('/exam-list/:id',AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.listUserSchema,'query'),ExamController.examList);
 router.get('/exam-details/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.examDetails);
@@ -55,5 +60,8 @@ router.get('/results-list',AuthenticationMiddleware.authenticateRequestAPI,ExamC
 router.post('/start-exam',AuthenticationMiddleware.authenticateRequestAPI,ExamController.startExam);
 router.get('/view-answers-list/:exam_conducted_id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.viewAnswer);
 
+// ######################## prior exams #####################
+
+router.get('/prior-exam',AuthenticationMiddleware.authenticateRequestAPI,ExamController.previousExams);
 
 module.exports = router;
