@@ -14,16 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   exam_conducted_users.init({
-    exam_id: DataTypes.STRING,
-    question_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    exam_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
     total_questions: DataTypes.STRING,
     total_attended_questions: DataTypes.STRING,
     right_answer: DataTypes.STRING,
     wrong_answer: DataTypes.STRING,
     not_answer: DataTypes.STRING,
-    score: DataTypes.STRING,
-    rank: DataTypes.STRING
+    scored: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'exam_conducted_users',

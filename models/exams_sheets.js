@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   exams_sheets.init({
-    exam_conduted_user_id: DataTypes.STRING,
+    exam_conducted_id: DataTypes.INTEGER,
     question_id: DataTypes.STRING,
     chosen_answer: DataTypes.STRING,
-    anwer_status: DataTypes.ENUM('right', 'wrong')
+    answer_status: DataTypes.ENUM('right', 'wrong','not-answered')
   }, {
     sequelize,
     modelName: 'exams_sheets',

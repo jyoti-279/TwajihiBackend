@@ -45,6 +45,7 @@ module.exports.examSchema = Joi.object().keys({
     sub_category_id: Joi.string().required(),
     exam_name: Joi.string().required(),
     total_time: Joi.string().required(),
+    total_questions: Joi.string().required(),
     marks_per_question: Joi.string().required(),
     questions: Joi.array().required()
 });

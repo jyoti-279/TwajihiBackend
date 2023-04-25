@@ -54,7 +54,11 @@ router.get('/subcatagory-list/:catagory_id',SettingController.SubCatagoryList);
 router.get('/exam-list/:id',AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.listUserSchema,'query'),ExamController.examList);
 router.get('/exam-details/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.examDetails);
 router.get('/question-list/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.questionsList);
-router.post('/submit-exam', AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.submitExam, 'body'), ExamController.submitExam); // Submit exam
+router.post('/submit-exam/:id', AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.submitExam, 'body'), ExamController.submitExam); // Submit exam
+router.get('/result-details/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.viewResultDetails);
+router.get('/results-list',AuthenticationMiddleware.authenticateRequestAPI,ExamController.viewResultList);
+router.post('/start-exam',AuthenticationMiddleware.authenticateRequestAPI,ExamController.startExam);
+router.get('/view-answers-list/:exam_conducted_id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.viewAnswer);
 
 // ######################## prior exams #####################
 
