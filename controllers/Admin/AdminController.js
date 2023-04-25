@@ -13,6 +13,8 @@
 // ################################ Repositories ################################ //
 const UserRepo = require('../../repositories/AuthenticationRepo');
 const AdminRepo = require('../../repositories/AdminRepo');
+const UserRepositories = require('../../repositories/UserRepo');
+const examsRepo = require('../../repositories/ExamsRepo');
 
 // ################################ Sequelize ################################ //
 const sequelize = require('../../config/dbConfig').sequelize;
@@ -79,6 +81,50 @@ module.exports.adminLogin = (req, res) => {
                     purpose: purpose
                 })
             }
+        } catch (e) {
+            console.log("Admin Login ERROR : ", e);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  dashboardData
+| Response          :  Respective response message in JSON format
+| Logic             :  Admin Login
+| Request URL       :  BASE_URL/admin/dashboard-data
+| Request method    :  GET
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.dashboardData = (req, res) => {
+    (async() => {
+        let purpose = "Dashboard Data";
+        try {
+            
+           
+              let userCount = await UserRepo.count({})
+              let examCount = await examsRepo.count({})
+              let prioryearscount = await examsRepo.count({})
+
+                return res.status(200).send({
+                    status: 200,
+                    msg: responseMessages.dashboardData,
+                    data: {
+                        totalUserCount: userCount,
+                        totalExams: examCount,
+                        totalprioryearexams: prioryearscount
+                    },
+                    purpose: purpose
+                })
+            
+            
         } catch (e) {
             console.log("Admin Login ERROR : ", e);
             return res.status(500).send({

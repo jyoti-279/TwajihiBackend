@@ -46,6 +46,8 @@ module.exports = {
     examList:"Exam List",
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
-    questionsSubmit: "Exam submitted successfully"
+    questionsSubmit: "Exam submitted successfully",
+
+    dashboardData: "Dashboard data fetched successfully",
 
 }

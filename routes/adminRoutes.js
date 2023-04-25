@@ -38,5 +38,7 @@ router.post('/create-sub-category', authenticationMiddleware.authenticateAdminRe
 
 
 
+//######################################### Dashboard #####################################
+router.get('/dashboard-data', authenticationMiddleware.authenticateAdminRequestAPI, AdminController.dashboardData); // Fetch Dashbord Data
 
 module.exports = router;
