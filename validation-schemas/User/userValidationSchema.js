@@ -37,7 +37,6 @@ module.exports.loginSchema = Joi.object().keys({
 
 // Submit Exam Schema
 module.exports.submitExam = Joi.object().keys({
-    exam_id: Joi.number().required(),
     questions_answers: Joi.array().required()
 });
 

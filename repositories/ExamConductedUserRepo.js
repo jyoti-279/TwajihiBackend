@@ -1,13 +1,18 @@
 const sequelize = require('../config/dbConfig').sequelize;
 var DataTypes = require('sequelize/lib/data-types');
-const Questions = require('../models/questions')(sequelize, DataTypes);
+const ExamsConductedUsers = require('../models/exam_conducted_users')(sequelize, DataTypes);
+const Exams = require('../models/exams')(sequelize, DataTypes);
+
+ExamsConductedUsers.belongsTo(Exams, {foreignKey: 'exam_id', as: 'exam_details'});
+
+
 
 
 //Find One
-module.exports.findOne = (where) => {
+module.exports.findOne = () => {
     return new Promise((resolve, reject) => {
-        Questions.findOne({
-            where: where
+        ExamsConductedUsers.findOne({
+            where: {id: 1}
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
@@ -25,7 +30,7 @@ module.exports.create = (whereData, t = null) => {
 
         if (t != null) options.transaction = t;
 
-        Questions.create(whereData, options).then(result => {
+        ExamsConductedUsers.create(whereData, options).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -37,9 +42,15 @@ module.exports.create = (whereData, t = null) => {
 //Find All
 module.exports.findAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
-        Questions.findAll({
+        ExamsConductedUsers.findAll({
             where: whereData,
-            attributes:['id','exam_id','question_name','question_type','answer_one','answer_two','answer_three','answer_four']
+            include:[
+                {
+                    model:Exams,
+                    as:'exam_details',
+                    required:false
+                }
+              ],
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
@@ -59,7 +70,7 @@ module.exports.update = (whereData, data, t = null) => {
 
         if (t != null) options.transaction = t;
 
-        Questions.update(data, options).then(result => {
+        ExamsConductedUsers.update(data, options).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -72,8 +83,11 @@ module.exports.update = (whereData, data, t = null) => {
 //Find All
 module.exports.findAndCountAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
-        Questions.findAndCountAll({
+        ExamsConductedUsers.findAndCountAll({
             where: whereData,
+            offset: data.offset,
+            limit: data.limit,
+            order: data.order,
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
