@@ -15,7 +15,7 @@ const subCategoryRepo = require('../../repositories/SubCategoryRepo');
 const categoryRepo = require('../../repositories/CategoryRepo');
 const examsRepo = require('../../repositories/ExamsRepo');
 const questionsRepo = require('../../repositories/QuestionsRepo');
-
+const moment = require("moment");
 // ################################ Sequelize ################################ //
 const sequelize = require('../../config/dbConfig').sequelize;
 
@@ -276,4 +276,46 @@ module.exports.submitExam = (req, res) => {
                     })
                 }
             })()
+}
+
+
+/*
+|------------------------------------------------ 
+| API name          :  previousExams
+| Response          :  Respective response message in JSON format
+| Logic             :  previousExams
+| Request URL       :  BASE_URL/
+| Request method    :  GET
+| Author            :  
+|------------------------------------------------
+*/
+module.exports.previousExams = (req, res) => {
+    (async () => {
+        let purpose = "Questions List"
+        try {
+
+            let questions = [];
+            let where = { exam_year: {$lt: moment().format('YYYY')}};
+                let questionsList = await examsRepo.findAll(where);
+                questionsList.forEach(element => {
+                    questions.push(element)
+                    
+                });
+
+                return res.status(200).json({
+                    status: 200,
+                    msg: responseMessages.examList,
+                    data: {questions: questions},
+                    purpose: purpose
+                })
+        } catch (err) {
+            console.log("Questions List ERROR : ", err);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
 }

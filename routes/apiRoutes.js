@@ -56,5 +56,8 @@ router.get('/exam-details/:id',AuthenticationMiddleware.authenticateRequestAPI,E
 router.get('/question-list/:id',AuthenticationMiddleware.authenticateRequestAPI,ExamController.questionsList);
 router.post('/submit-exam', AuthenticationMiddleware.authenticateRequestAPI,validRequest.validate(UserValidation.submitExam, 'body'), ExamController.submitExam); // Submit exam
 
+// ######################## prior exams #####################
+
+router.get('/prior-exam',AuthenticationMiddleware.authenticateRequestAPI,ExamController.previousExams);
 
 module.exports = router;

@@ -43,7 +43,10 @@ router.get('/users-list', authenticationMiddleware.authenticateAdminRequestAPI, 
 router.post('/create-exam',authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.examSchema, 'body'), ExamsController.createExam)// Create Exam
 router.get('/exams-list', authenticationMiddleware.authenticateAdminRequestAPI,validateRequest.validate(adminValidationSchema.listUserSchema, 'query'), ExamsController.listExam)// Create Exam
 router.get('/exams-details/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.examDetails)// Exam Details
-
+router.delete('/delete-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.deleteExam);
+router.put('/update-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.updateExam);
+router.post('/add-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.AddQuestions);
+router.put('/update-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,ExamsController.updateQuestion);
 
 // ####################################### Settings ########################################## //
 router.get('/category-list', authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.listUserSchema, 'query'), SettingsController.listCategories); // Fetch User List
