@@ -17,6 +17,17 @@ module.exports.findOne = () => {
     })
 }
 
+module.exports.count = (data) => {
+    return new Promise((resolve, reject) => {
+        Exams.count(data).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
 
 //Create
 module.exports.create = (whereData, t = null) => { 

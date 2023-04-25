@@ -35,19 +35,22 @@ const exams = require("../../models/exams");
 |------------------------------------------------
 */
 module.exports.createExam = (req, res) => {
-    (async () => {
-        let purpose = "Create Exam";
-        try {
-            let body = req.body;
-            let createData = {
-                category_id: body.category_id,
-                subcategory_id: body.sub_category_id,
-                exam_name: body.exam_name,
-                total_questions: body.total_questions,
-                total_time: body.total_time,
-                marks_per_question: body.marks_per_question,
-                total_marks: Number(body.total_questions) * Number(body.marks_per_question)
-            }
+
+  (async () => {
+      let purpose = "Create Exam";
+      try {
+        let body = req.body;
+        let createData = {
+          category_id: body.category_id,
+          subcategory_id: body.sub_category_id,
+          exam_name: body.exam_name,
+          total_questions: body.total_questions,
+          total_time: body.total_time,
+          marks_per_question: body.marks_per_question,
+          total_marks: Number(body.total_questions) * Number(body.marks_per_question),
+          exam_year: moment().format('YYYY'),
+        };
+        let data = await examsRepo.create(createData);
 
       let questionsPromiseAll = [];
       if (body.questions.length > 0) {

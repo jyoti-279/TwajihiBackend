@@ -56,5 +56,7 @@ router.post('/create-sub-category', authenticationMiddleware.authenticateAdminRe
 router.post('/upload-category-image/:id', authenticationMiddleware.authenticateAdminRequestAPI, uploadCatagoryImage.single('image'),SettingsController.uploadCatagoryImage);
 
 
+//######################################### Dashboard #####################################
+router.get('/dashboard-data', authenticationMiddleware.authenticateAdminRequestAPI, AdminController.dashboardData); // Fetch Dashbord Data
 
 module.exports = router;

@@ -18,6 +18,7 @@ const questionsRepo = require('../../repositories/QuestionsRepo');
 const examCondutedRepo = require('../../repositories/ExamConductedUserRepo');
 const examSheetsRepo = require('../../repositories/ExamSheetsRepo');
 
+const moment = require("moment");
 // ################################ Sequelize ################################ //
 const sequelize = require('../../config/dbConfig').sequelize;
 
@@ -304,6 +305,185 @@ module.exports.submitExam = (req, res) => {
         catch (err) {
             console.log("Questions Submit Error : ", err);
             return res.send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  viewResultDetails
+| Response          :  Respective response message in JSON format
+| Logic             :  Fetch Result Details
+| Request URL       :  BASE_URL/api/result-details/:id
+| Request method    :  GET
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.viewResultDetails = (req, res) => {
+    (async () => {
+        let purpose = "Views Result Details"
+        try {
+            let params = req.params;
+
+            let where = {
+                id: params.id
+            }
+            let examResultDetails = await examCondutedRepo.findOne(where);
+
+            return res.status(200).json({
+                status: 200,
+                msg: responseMessages.examResultDetails,
+                data: examResultDetails,
+                purpose: purpose
+            })
+        } catch (err) {
+            console.log("Exams Result Details ERROR : ", err);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  viewResultList
+| Response          :  Respective response message in JSON format
+| Logic             :  Fetch Result Details
+| Request URL       :  BASE_URL/api/result-list/:id
+| Request method    :  GET
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.viewResultList = (req, res) => {
+    (async () => {
+        let purpose = "Views Result List"
+        try {
+            let userID = req.headers.userID;
+
+            let examResultList = await examCondutedRepo.findAll({ user_id: userID });
+
+            return res.status(200).json({
+                status: 200,
+                msg: responseMessages.examResultList,
+                data: examResultList,
+                purpose: purpose
+            })
+        } catch (err) {
+            console.log("Exams Result List ERROR : ", err);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  viewAnswer
+| Response          :  Respective response message in JSON format
+| Logic             :  Fetch Result Details
+| Request URL       :  BASE_URL/api/result-details/:id
+| Request method    :  GET
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.viewAnswer = (req, res) => {
+    (async () => {
+        let purpose = "Answers List"
+        try {
+
+            let exam_conducted_id = req.params.exam_conducted_id;
+
+            let answerList = await examSheetsRepo.findAll({ exam_conducted_id: exam_conducted_id });
+
+            let answers = []
+
+            let PromiseAll = [];
+            answerList.forEach(async element => {
+                PromiseAll.push(
+                    new Promise(async (resolve, reject) => {
+
+                        let correct_answer = await questionsRepo.findOne({ id: element.id })
+                        answers.push({
+                            id: element.id,
+                            exam_conducted_id: element.exam_conducted_id,
+                            question_id: element.question_id,
+                            chosen_answer: element.chosen_answer,
+                            answer_status: element.answer_status,
+                            question: correct_answer
+                        })
+
+                        resolve(true);
+                    })
+                )
+            })
+            Promise.all(PromiseAll).then(() => {
+                return res.status(200).json({
+                    status: 200,
+                    msg: responseMessages.examResultList,
+                    data: answers,
+                    purpose: purpose
+                })
+            })
+        } catch (err) {
+            console.log("Answer Result List ERROR : ", err);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+
+
+/*
+|------------------------------------------------ 
+| API name          :  previousExams
+| Response          :  Respective response message in JSON format
+| Logic             :  previousExams
+| Request URL       :  BASE_URL/
+| Request method    :  GET
+| Author            :  
+|------------------------------------------------
+*/
+module.exports.previousExams = (req, res) => {
+    (async () => {
+        let purpose = "Questions List"
+        try {
+
+            let questions = [];
+            let where = { exam_year: {$lt: moment().format('YYYY')}};
+                let questionsList = await examsRepo.findAll(where);
+                questionsList.forEach(element => {
+                    questions.push(element)
+                    
+                });
+
+                return res.status(200).json({
+                    status: 200,
+                    msg: responseMessages.examList,
+                    data: {questions: questions},
+                    purpose: purpose
+                })
+        } catch (err) {
+            console.log("Questions List ERROR : ", err);
+
+            return res.status(500).send({
                 status: 500,
                 msg: responseMessages.serverError,
                 data: {},
