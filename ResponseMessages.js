@@ -38,13 +38,8 @@ module.exports = {
     categoryDetails: "Fetched category details successfully",
 
     examDetails:"Exam Details",
-<<<<<<< HEAD
     examDelete:"Exam Deleted Successfully",
     examUpdate:"Exam Updated Successfully",
-=======
-    examResultDetails:"Exam result details",
-    examResultList:"Exam result list",
->>>>>>> f137739a540212b7c4be9bd4cae850161356023b
     examList:"Exam List",
     createExam: "Exam Create Successfully",
     createQuestions: "Questions Added Successfully",

@@ -59,7 +59,7 @@ module.exports.AddQuestions = (req, res) => {
                   answer_four_status: element.answer_four_status,
                 };
                 let questionList = await questionsRepo.create(questions);
-  
+
                 resolve(true);
               })
             );
