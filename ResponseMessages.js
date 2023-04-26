@@ -43,10 +43,15 @@ module.exports = {
     examDelete:"Exam Deleted Successfully",
     examUpdate:"Exam Updated Successfully",
     examList:"Exam List",
+    questionList:"Question List Fetch Successfully",
     createExam: "Exam Create Successfully",
     createQuestions: "Questions Added Successfully",
     updateQuestions: "Questions Updated Successfully",
+    questionDelete:"Question Deleted Successfully",
+    answerView: "Answer View Successfully",
+    periorExam: "Perior Exam List",
 
+    unableTodelete: "Unable to Delete",
 
 
     changePassword: "Password Changed Successfully",
