@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   prior_year_questions.init({
-    prior_year_id: DataTypes.INTEGER,
+    prior_year_exam_id: DataTypes.STRING,
     question_name: DataTypes.STRING,
     question_type: DataTypes.ENUM('1', '2', '3', '4'),
     answer_one: DataTypes.STRING,
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     answer_three_status: DataTypes.ENUM('right', 'wrong'),
     answer_four_status: DataTypes.ENUM('right', 'wrong'),
     question_status: DataTypes.ENUM('0', '1'),
-    answer: DataTypes.STRING,
+    answer: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'prior_year_questions',

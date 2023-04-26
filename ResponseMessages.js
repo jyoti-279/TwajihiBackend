@@ -46,7 +46,9 @@ module.exports = {
     createExam: "Exam Create Successfully",
     createQuestions: "Questions Added Successfully",
     updateQuestions: "Questions Updated Successfully",
+    questionDelete:"Question Deleted Successfully",
 
+    unableTodelete: "Unable to Delete",
 
 
     changePassword: "Password Changed Successfully",

@@ -32,6 +32,7 @@ const AdminController = require('../controllers/Admin/AdminController');
 const userController = require('../controllers/Admin/UserController');
 const SettingsController = require('../controllers/Admin/SettingsController');
 const ExamsController = require('../controllers/Admin/ExamController');
+const PerioryearQuestionController = require('../controllers/Admin/PeriorYearExamController');
 
 /* ############################################ Routes  ############################################ */
 router.post('/login', validateRequest.validate(adminValidationSchema.loginSchema, 'body'), AdminController.adminLogin); // Admin Login Route
@@ -58,5 +59,16 @@ router.post('/upload-category-image/:id', authenticationMiddleware.authenticateA
 
 //######################################### Dashboard #####################################
 router.get('/dashboard-data', authenticationMiddleware.authenticateAdminRequestAPI, AdminController.dashboardData); // Fetch Dashbord Data
+
+// ###################################### perior year exam  ###################################
+
+router.post('/add-perior-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.AddQuestions);
+router.delete('/delete-perior-question',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.deleteQuestion);
+router.put('/update-perior-question/:examId',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.updateQuestion);
+router.post('/add-perior-exam',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.createExam);
+router.put('/update-perior-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.updateExam);
+router.delete('/delete-perior-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.deleteExam);
+
+
 
 module.exports = router;
