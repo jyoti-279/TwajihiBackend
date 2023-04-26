@@ -14,12 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   prior_year_exams.init({
+    category_id:DataTypes.INTEGER,
+    subcategory_id: DataTypes.INTEGER,
+    status:DataTypes.STRING,
     exam_name: DataTypes.STRING,
+    exam_year: DataTypes.STRING,
     total_questions: DataTypes.STRING,
+    total_time: DataTypes.STRING,
     
   }, {
     sequelize,
     modelName: 'prior_year_exams',
   });
+
   return prior_year_exams;
 };
