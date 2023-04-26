@@ -188,6 +188,40 @@ module.exports.updateCategory = (req, res) => {
     })()
 }
 
+/*
+|------------------------------------------------ 
+| API name          :  deleteCategory
+| Response          :  Respective response message in JSON format
+| Logic             :  Edit Advertisement
+| Request URL       :  BASE_URL/admin/category-update/:id
+| Request method    :  DELETE
+| Author            :  Sayan De
+|------------------------------------------------
+*/
+module.exports.deleteCategory = (req, res) => {
+    (async() => {
+        let purpose = "Delete Category";
+        try {
+            let deleteCatagory = await categoryRepo.delete({id: req.params.id});
+
+            return res.status(200).send({
+                status: 200,
+                msg: responseMessages.deleteCatagory,
+                data: {},
+                purpose: purpose
+            })
+        } catch (e) {
+            console.log("Delete Category ERROR : ", e);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
 
 /*
 |------------------------------------------------ 
@@ -362,4 +396,38 @@ module.exports.uploadCatagoryImage = (req, res) => {
         });
       }
     })();
-  };
+};
+
+/*
+|------------------------------------------------ 
+| API name          :  deleteSubCategory
+| Response          :  Respective response message in JSON format
+| Logic             :  deleteSubCategory
+| Request URL       :  BASE_URL/admin/category-update/:id
+| Request method    :  DELETE
+| Author            :  Sayan De
+|------------------------------------------------
+*/
+module.exports.deleteSubCategory = (req, res) => {
+    (async() => {
+        let purpose = "Delete SubCategory";
+        try {
+            let subCategoryDelete = await subCategoryRepo.delete({id: req.params.id});
+
+            return res.status(200).send({
+                status: 200,
+                msg: responseMessages.deleteCatagory,
+                data: {},
+                purpose: purpose
+            })
+        } catch (e) {
+            console.log("Delete SubCategory ERROR : ", e);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
