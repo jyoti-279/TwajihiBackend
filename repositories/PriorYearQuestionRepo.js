@@ -41,3 +41,25 @@ module.exports.delete = (where) => {
         })
     })
 }
+
+module.exports.findAll = (where) => {
+    return new Promise((resolve, reject) => {
+        Questions.findAll({where:where}).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
+module.exports.findOne = (where) => {
+    return new Promise((resolve, reject) => {
+        Questions.findOne({where:where}).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}

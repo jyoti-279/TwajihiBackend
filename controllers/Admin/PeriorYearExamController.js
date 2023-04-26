@@ -215,6 +215,7 @@ module.exports.AddQuestions = (req, res) => {
                   answer_two_status: element.answer_two_status,
                   answer_three_status: element.answer_three_status,
                   answer_four_status: element.answer_four_status,
+                  answer: element.answer,
                 };
                 let questionList = await questionsRepo.create(questions);
 
@@ -271,6 +272,7 @@ module.exports.updateQuestion = (req, res) => {
         answer_two_status: body.answer_two_status,
         answer_three_status: body.answer_three_status,
         answer_four_status: body.answer_four_status,
+        answer: body.answer,
       };
       let updateQuestion = await questionsRepo.update({id: body.id},questions)
 
