@@ -1,7 +1,10 @@
 const sequelize = require('../config/dbConfig').sequelize;
 var DataTypes = require('sequelize/lib/data-types');
 const Category = require('../models/categories')(sequelize, DataTypes);
+const SubCategory = require('../models/sub_categories')(sequelize, DataTypes);
 
+
+Category.hasMany(SubCategory,{foreignKey:'category_id', as:'Subcatagories'});
 
 //Find One
 module.exports.findOne = () => {
@@ -39,6 +42,12 @@ module.exports.findAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
         Category.findAll({
             where: whereData,
+            include:[
+                {
+                    model:SubCategory,
+                    as: 'Subcatagories' 
+                }
+            ]
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);

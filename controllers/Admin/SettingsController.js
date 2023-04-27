@@ -326,7 +326,7 @@ module.exports.updateSubCategory = (req, res) => {
             let body = req.body;
             
             let editData = {
-                category_id: body.cat_id,
+                category_id: body.category_id,
                 category_name: body.category_name,
             }
 
