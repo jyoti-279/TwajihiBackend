@@ -50,6 +50,8 @@ module.exports = {
     questionDelete:"Question Deleted Successfully",
     answerView: "Answer View Successfully",
     periorExam: "Perior Exam List",
+    deleteCatagory: "Category Deleted Successfully",
+    deleteSubCatagory: "SubCategory Deleted Successfully",
 
     unableTodelete: "Unable to Delete",
 

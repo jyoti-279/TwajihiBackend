@@ -55,7 +55,9 @@ router.post('/create-category', validateRequest.validate(adminValidationSchema.c
 router.put('/update-category/:id', validateRequest.validate(adminValidationSchema.catgorySchema, 'body'), SettingsController.updateCategory); // User Category
 router.post('/create-sub-category', authenticationMiddleware.authenticateAdminRequestAPI, validateRequest.validate(adminValidationSchema.subCatgorySchema, 'body'), SettingsController.createSubCategory); // Fetch User List
 router.post('/upload-category-image/:id', authenticationMiddleware.authenticateAdminRequestAPI, uploadCatagoryImage.single('image'),SettingsController.uploadCatagoryImage);
-
+router.post('/update-subcategory/:id',authenticationMiddleware.authenticateRequestAPI,SettingsController.updateSubCategory);
+router.delete('/delete-category/:id',authenticationMiddleware.authenticateRequestAPI,SettingsController.deleteCategory);
+router.delete('/delete-subcategory/:id',authenticationMiddleware.authenticateRequestAPI,SettingsController.deleteSubCategory);
 
 //######################################### Dashboard #####################################
 router.get('/dashboard-data', authenticationMiddleware.authenticateAdminRequestAPI, AdminController.dashboardData); // Fetch Dashbord Data
