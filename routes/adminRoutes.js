@@ -74,7 +74,7 @@ router.delete('/delete-perior-exam/:id',authenticationMiddleware.authenticateAdm
 
 // ################################# CMS #################################
 router.post('/add-cms',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.AddCms);
-router.put('/update-cms/:id',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.updateCms);
+router.put('/update-cms',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.updateCms);
 router.delete('/delete-cms/:id',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.deleteCms);
 
 module.exports = router;

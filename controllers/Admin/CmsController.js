@@ -105,12 +105,9 @@ module.exports.updateCms = (req, res) => {
         let purpose = "Add CMS";
         try {
             let body = req.body;
-            let id = req.params.id;
-            // let updateData = {
-            //     page_name: body.page_name,
-            //     content: body.content,
-            // }
-            let update = await CmsRepo.update({id: id},{content: body.content});
+            let queryParam = req.query;
+            
+            let update = await CmsRepo.update({page_name: queryParam.page_name},{content: body.content});
 
             return res.status(200).send({
                 status: 200,
