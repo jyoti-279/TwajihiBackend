@@ -25,6 +25,7 @@ const ProfileController = require('../controllers/User/ProfileController');
 const ExamController = require('../controllers/User/ExamController');
 const SettingController = require('../controllers/User/SettingController');
 const PeriorYearExamController = require('../controllers/User/PeriorYearExamController');
+const CmsController = require('../controllers/User/CmsController');
 
 // ################################# Joi  Validation Schema #################################
 const UserValidation = require('../validation-schemas/User/userValidationSchema');
@@ -66,5 +67,8 @@ router.get('/view-answers-list/:exam_conducted_id',AuthenticationMiddleware.auth
 router.get('/prior-exam',AuthenticationMiddleware.authenticateRequestAPI,PeriorYearExamController.previousExams);
 router.get('/prior-exam-questions/:exam_id',AuthenticationMiddleware.authenticateRequestAPI,PeriorYearExamController.questionsList);
 router.post('/view-answer',AuthenticationMiddleware.authenticateRequestAPI,PeriorYearExamController.viewAnswer);
+
+// ###################### CMS #################
+router.get('/get-cms',CmsController.getCmsContent);
 
 module.exports = router;

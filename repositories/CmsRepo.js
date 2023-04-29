@@ -1,12 +1,11 @@
 const sequelize = require('../config/dbConfig').sequelize;
 var DataTypes = require('sequelize/lib/data-types');
-const Exam = require('../models/prior_year_exams')(sequelize, DataTypes);
-
+const Cms = require('../models/cms_page')(sequelize, DataTypes);
 
 
 module.exports.create = (data) => {
     return new Promise((resolve, reject) => {
-        Exam.create(data).then(result => {
+        Cms.create(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
@@ -14,6 +13,35 @@ module.exports.create = (data) => {
         })
     })
 }
+
+
+
+//Find One
+module.exports.findOne = (where) => {
+    return new Promise((resolve, reject) => {
+        Cms.findOne({
+            where: where
+        }).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
+
+module.exports.delete = (where) => {
+    return new Promise((resolve, reject) => {
+        Cms.destroy({where:where}).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
 
 module.exports.update = (whereData, data, t = null) => {
     return new Promise((resolve, reject) => {
@@ -23,29 +51,7 @@ module.exports.update = (whereData, data, t = null) => {
 
         if (t != null) options.transaction = t;
 
-        Exam.update(data, options).then(result => {
-            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
-            resolve(result);
-        }).catch((error) => {
-            reject(error);
-        })
-    })
-}
-
-module.exports.delete = (where) => {
-    return new Promise((resolve, reject) => {
-        Exam.destroy({where:where}).then(result => {
-            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
-            resolve(result);
-        }).catch((error) => {
-            reject(error);
-        })
-    })
-}
-
-module.exports.findAll = (where) => {
-    return new Promise((resolve, reject) => {
-        Exam.findAll({where:where}).then(result => {
+        Cms.update(data, options).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {

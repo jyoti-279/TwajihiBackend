@@ -33,6 +33,7 @@ const userController = require('../controllers/Admin/UserController');
 const SettingsController = require('../controllers/Admin/SettingsController');
 const ExamsController = require('../controllers/Admin/ExamController');
 const PerioryearQuestionController = require('../controllers/Admin/PeriorYearExamController');
+const CmsController = require('../controllers/Admin/CmsController');
 
 /* ############################################ Routes  ############################################ */
 router.post('/login', validateRequest.validate(adminValidationSchema.loginSchema, 'body'), AdminController.adminLogin); // Admin Login Route
@@ -71,6 +72,9 @@ router.post('/add-perior-exam',authenticationMiddleware.authenticateAdminRequest
 router.put('/update-perior-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.updateExam);
 router.delete('/delete-perior-exam/:id',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearQuestionController.deleteExam);
 
-
+// ################################# CMS #################################
+router.post('/add-cms',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.AddCms);
+router.put('/update-cms/:id',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.updateCms);
+router.delete('/delete-cms/:id',authenticationMiddleware.authenticateAdminRequestAPI,CmsController.deleteCms);
 
 module.exports = router;

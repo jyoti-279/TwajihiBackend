@@ -54,6 +54,9 @@ module.exports = {
     deleteSubCatagory: "SubCategory Deleted Successfully",
 
     unableTodelete: "Unable to Delete",
+    CmsAdd: "CMS Page Added Successfully",
+    cmsDelete: "CMS Page Deleted Successfully",
+    cmsUpdate: "CMS Page Updated Successfully",
 
 
     changePassword: "Password Changed Successfully",
