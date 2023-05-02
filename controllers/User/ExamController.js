@@ -17,6 +17,7 @@ const examsRepo = require('../../repositories/ExamsRepo');
 const questionsRepo = require('../../repositories/QuestionsRepo');
 const examCondutedRepo = require('../../repositories/ExamConductedUserRepo');
 const examSheetsRepo = require('../../repositories/ExamSheetsRepo');
+const examSettingsRepo = require('../../repositories/ExamSettingsRepo');
 
 const moment = require("moment");
 // ################################ Sequelize ################################ //
@@ -135,7 +136,7 @@ module.exports.questionsList = (req, res) => {
             let where = {
                 exam_id: params.id
             }
-            let questionsList = await questionsRepo.findAll(where);
+            let questionsList = await examSettingsRepo.findAll(where);
             //let question = getRandomValues(questionsList.length-1)
             let question = questionsList.map(value => ({ value, sort: Math.random() }))
                     .sort((a, b) => a.sort - b.sort)
