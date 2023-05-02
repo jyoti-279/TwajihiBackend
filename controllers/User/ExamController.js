@@ -369,12 +369,20 @@ module.exports.viewResultList = (req, res) => {
         try {
             let userID = req.headers.userID;
 
+            let result = [];
             let examResultList = await examCondutedRepo.findAll({ user_id: userID });
+            examResultList.forEach(element =>{
+                result.push({
+                    exam_name: element.Exams.exam_name,
+                    total_questions: element.Exams.total_questions,
+                    time: element.Exams.total_time,
+            })
+            })
 
             return res.status(200).json({
                 status: 200,
                 msg: responseMessages.examResultList,
-                data: examResultList,
+                data: result,
                 purpose: purpose
             })
         } catch (err) {
