@@ -7,12 +7,22 @@ ExamsConductedUsers.belongsTo(Exams, {foreignKey: 'exam_id', as: 'exam_details'}
 
 
 
+module.exports.count = (data) => {
+    return new Promise((resolve, reject) => {
+        ExamsConductedUsers.count(data).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
 
 //Find One
-module.exports.findOne = () => {
+module.exports.findOne = (where) => {
     return new Promise((resolve, reject) => {
         ExamsConductedUsers.findOne({
-            where: {id: 1}
+            where: where
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
@@ -96,3 +106,4 @@ module.exports.findAndCountAll = (whereData, data) => {
         })
     })
 }
+

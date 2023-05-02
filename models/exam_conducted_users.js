@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     wrong_answer: DataTypes.STRING,
     not_answer: DataTypes.STRING,
     scored: DataTypes.INTEGER,
+    exam_given: DataTypes.ENUM('true','false')
   }, {
     sequelize,
     modelName: 'exam_conducted_users',

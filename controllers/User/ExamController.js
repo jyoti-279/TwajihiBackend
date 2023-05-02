@@ -231,6 +231,17 @@ module.exports.submitExam = (req, res) => {
             let examConductedDetails = await examCondutedRepo.findOne({id:examContudedId})
             let examDetails = await examsRepo.findOne({id:examConductedDetails.exam_id})
 
+            let examGivenDetails = await examCondutedRepo.count({id:examContudedId,exam_give:'true'})
+
+            if(examGivenDetails == 1){
+                return res.status(409).json({
+                    status: 409,
+                    msg: responseMessages.examDuplicate,
+                    data: {},
+                    purpose: purpose
+                })  
+            }
+
             //Add answers
             if (questions.length > 0) {
                 questions.forEach(async element => {
@@ -286,6 +297,7 @@ module.exports.submitExam = (req, res) => {
                     wrong_answer: totalWrongAnswers,
                     not_answer: totalNotAnswered,
                     scored: Number(totalRightAnswers) * examDetails.marks_per_question,
+                    exam_given: 'true'
 
                 }
 
@@ -295,7 +307,7 @@ module.exports.submitExam = (req, res) => {
                     return res.send({
                         status: 200,
                         msg: responseMessages.questionsSubmit,
-                        data: exams,
+                        data: {examContudedId:examContudedId},
                         purpose: purpose
                     })
                 })
@@ -333,6 +345,18 @@ module.exports.viewResultDetails = (req, res) => {
             let where = {
                 id: params.id
             }
+
+            let examResultDetailsCount = await examCondutedRepo.count(where);
+            if(examResultDetailsCount == 0){
+                return res.status(409).json({
+                    status: 409,
+                    msg: responseMessages.noResultFound,
+                    data: {},
+                    purpose: purpose
+                })  
+            }
+
+
             let examResultDetails = await examCondutedRepo.findOne(where);
 
             return res.status(200).json({

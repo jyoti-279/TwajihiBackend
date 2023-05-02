@@ -1,13 +1,14 @@
 const sequelize = require('../config/dbConfig').sequelize;
+const { where } = require('sequelize');
 var DataTypes = require('sequelize/lib/data-types');
 const PriorYearExams = require('../models/prior_year_exams')(sequelize, DataTypes);
 
 
 //Find One
-module.exports.findOne = () => {
+module.exports.findOne = (where) => {
     return new Promise((resolve, reject) => {
         PriorYearExams.findOne({
-            where: {id: 1}
+            where: where
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
