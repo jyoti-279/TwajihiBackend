@@ -263,4 +263,9 @@ module.exports.createAdminFeesSchema = Joi.object().keys({
 
 
 
-
+// Exam Settings
+module.exports.examSettings = Joi.object().keys({
+    total_time: Joi.string().required(),
+    total_questions: Joi.string().required(),
+   
+});

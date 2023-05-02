@@ -99,6 +99,48 @@ module.exports.createExam = (req, res) => {
 
 /*
 |------------------------------------------------ 
+| API name          :  examList
+| Response          :  Respective response message in JSON format
+| Logic             :  examList
+| Request URL       :  BASE_URL/
+| Request method    :  GET
+| Author            :  Sayan De
+|------------------------------------------------
+*/
+module.exports.examList = (req, res) => {
+  (async () => {
+      let purpose = "Prior Exams List"
+      try {
+          let queryParam = req.query;
+          let data = {};
+          let page = queryParam.page ? parseInt(queryParam.page) : 1;
+          data.limit = 7;
+          data.offset = data.limit ? data.limit * (page - 1) : null;
+          let where = { exam_year: {$lt: moment().format('YYYY')}};
+          let examList = await examsRepo.findAll(where,data);
+
+          return res.status(200).json({
+              status: 200,
+              msg: responseMessages.examList,
+              data: {
+                  examList: examList,
+              },
+              purpose: purpose
+          })
+      } catch (err) {
+          console.log("Exams List ERROR : ", err);
+          return res.status(500).send({
+              status: 500,
+              msg: responseMessages.serverError,
+              data: {},
+              purpose: purpose
+          })
+      }
+  })()
+}
+
+/*
+|------------------------------------------------ 
 | API name          :  updateExam
 | Response          :  Respective response message in JSON format
 | Logic             :  updateExam

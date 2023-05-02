@@ -36,6 +36,7 @@ module.exports = {
     updateCategory: "Category update successfully",
     updateSubCategory: "Sub Category updated Successfully",
     categoryDetails: "Fetched category details successfully",
+    subcategoryList: "Fetched Sub-Category List successfully",
 
     examDetails:"Exam Details",
     examDuplicate:"Duplicate exam found",
@@ -61,12 +62,16 @@ module.exports = {
     CmsAdd: "CMS Page Added Successfully",
     cmsDelete: "CMS Page Deleted Successfully",
     cmsUpdate: "CMS Page Updated Successfully",
+    catagoryImageUpload: " Catagory Image Upload Successfully",
+    subcatagoryImageUpload: "Subcatagory Image Upload Successfully",
 
 
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
     questionsSubmit: "Exam submitted successfully",
-
     dashboardData: "Dashboard data fetched successfully",
+
+    examSettings: "Exam settings updated successfully",
+    examSettingsDetails: "Exam settings fetched successfully",
 
 }
