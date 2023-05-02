@@ -76,10 +76,13 @@ router.delete('/delete-category/:id',authenticationMiddleware.authenticateReques
 router.delete('/delete-subcategory/:id',authenticationMiddleware.authenticateRequestAPI,SettingsController.deleteSubCategory);
 router.get('/sub-category-list/:category_id',authenticationMiddleware.authenticateAdminRequestAPI,SettingsController.listSubCategories);
 
+router.put('/exam-settings-update', validateRequest.validate(adminValidationSchema.examSettings, 'body'), SettingsController.updateExamSettings); // Exam Settings
+router.get('/fetch-exam-settings-details', SettingsController.fetchExamSettings); // Exam Settings
+
 //######################################### Dashboard #####################################
 router.get('/dashboard-data', authenticationMiddleware.authenticateAdminRequestAPI, AdminController.dashboardData); // Fetch Dashbord Data
 
-// ###################################### perior year exam  ###################################
+// ###################################### prior year exam  ###################################
 
 router.post('/add-perior-questions/:examId',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearExamController.AddQuestions);
 router.delete('/delete-perior-question',authenticationMiddleware.authenticateAdminRequestAPI,PerioryearExamController.deleteQuestion);

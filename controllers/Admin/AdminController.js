@@ -119,7 +119,7 @@ module.exports.dashboardData = (req, res) => {
                     data: {
                         totalUserCount: userCount,
                         totalExams: examCount,
-                        totalprioryearexams: prioryearscount
+                        totalpriorExams: prioryearscount
                     },
                     purpose: purpose
                 })

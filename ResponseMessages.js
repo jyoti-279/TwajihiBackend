@@ -11,7 +11,7 @@ module.exports = {
     porofileImageUpdate: "Profile image updated successfully",
     notificationListRead: "Notification read successfully",
     invalidEmail: "Invalid Email Address ",
-    passwordreset: "password reset successfully",
+    passwordreset: "Password reseted successfully, Log in to continue",
     resetunable: "Unable to Reset the Password",
     loginSuccess: "Logged in successfully",
     invalidUserType: "You have to mention the user type",
@@ -39,6 +39,10 @@ module.exports = {
     subcategoryList: "Fetched Sub-Category List successfully",
 
     examDetails:"Exam Details",
+    examDuplicate:"Duplicate exam found",
+
+    noResultFound:"No result found for the exam",
+
     examResultDetails:"Exam result details",
     examResultList:"Exam result list",
     examDelete:"Exam Deleted Successfully",
@@ -65,7 +69,9 @@ module.exports = {
     changePassword: "Password Changed Successfully",
     userNotFound: "User Not Found",
     questionsSubmit: "Exam submitted successfully",
-
     dashboardData: "Dashboard data fetched successfully",
+
+    examSettings: "Exam settings updated successfully",
+    examSettingsDetails: "Exam settings fetched successfully",
 
 }

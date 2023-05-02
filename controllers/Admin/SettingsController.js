@@ -13,6 +13,7 @@
 // ################################ Repositories ################################ //
 const subCategoryRepo = require('../../repositories/SubCategoryRepo');
 const categoryRepo = require('../../repositories/CategoryRepo');
+const examSettingsRepo = require('../../repositories/ExamSettingsRepo');
 
 // ################################ Sequelize ################################ //
 const sequelize = require('../../config/dbConfig').sequelize;
@@ -476,6 +477,90 @@ module.exports.deleteSubCategory = (req, res) => {
             })
         } catch (e) {
             console.log("Delete SubCategory ERROR : ", e);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  updateExamSettings
+| Response          :  Respective response message in JSON format
+| Logic             :  Edit Advertisement
+| Request URL       :  BASE_URL/admin/exam-settings-update
+| Request method    :  PUT
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.updateExamSettings = (req, res) => {
+    (async() => {
+        let purpose = "Update exam settings";
+        try {
+            let body = req.body;
+            let examSettingsCount = await examSettingsRepo.count({id: 1});
+
+            if(examSettingsCount == 0){
+                let addData = {
+                    total_time:body.total_time,
+                    total_questions:body.total_questions
+                }
+    
+                let examSettings = await examSettingsRepo.create(addData);
+            }
+            let editData = {
+                total_time:body.total_time,
+                total_questions:body.total_questions
+            }
+
+            let examSettings = await examSettingsRepo.update({id: 1}, editData);
+
+            return res.status(200).send({
+                status: 200,
+                msg: responseMessages.examSettings,
+                data: {},
+                purpose: purpose
+            })
+        } catch (e) {
+            console.log("Update Category ERROR : ", e);
+            return res.status(500).send({
+                status: 500,
+                msg: responseMessages.serverError,
+                data: {},
+                purpose: purpose
+            })
+        }
+    })()
+}
+
+/*
+|------------------------------------------------ 
+| API name          :  fetchExamSettings
+| Response          :  Respective response message in JSON format
+| Logic             :  Edit Advertisement
+| Request URL       :  BASE_URL/admin/fetch-exam-settings-details
+| Request method    :  PUT
+| Author            :  Jyoti Vankala
+|------------------------------------------------
+*/
+module.exports.fetchExamSettings = (req, res) => {
+    (async() => {
+        let purpose = "Fetch exam settings";
+        try {
+            let examSettingsDetails = await examSettingsRepo.findOne({id: 1});
+
+            return res.status(200).send({
+                status: 200,
+                msg: responseMessages.examSettingsDetails,
+                data: examSettingsDetails,
+                purpose: purpose
+            })
+        } catch (e) {
+            console.log("Fetch Exam Settings ERROR : ", e);
             return res.status(500).send({
                 status: 500,
                 msg: responseMessages.serverError,

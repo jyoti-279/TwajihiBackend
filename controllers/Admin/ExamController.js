@@ -37,20 +37,20 @@ const exams = require("../../models/exams");
 module.exports.createExam = (req, res) => {
 
   (async () => {
-      let purpose = "Create Exam";
-      try {
-        let body = req.body;
-        let createData = {
-          category_id: body.category_id,
-          subcategory_id: body.sub_category_id,
-          exam_name: body.exam_name,
-          total_questions: body.total_questions,
-          total_time: body.total_time,
-          marks_per_question: body.marks_per_question,
-          total_marks: Number(body.total_questions) * Number(body.marks_per_question),
-          exam_year: moment().format('YYYY'),
-        };
-        let data = await examsRepo.create(createData);
+    let purpose = "Create Exam";
+    try {
+      let body = req.body;
+      let createData = {
+        category_id: body.category_id,
+        subcategory_id: body.sub_category_id,
+        exam_name: body.exam_name,
+        total_questions: body.total_questions,
+        total_time: body.total_time,
+        marks_per_question: body.marks_per_question,
+        total_marks: Number(body.total_questions) * Number(body.marks_per_question),
+        exam_year: moment().format('YYYY'),
+      };
+      let data = await examsRepo.create(createData);
 
       let questionsPromiseAll = [];
       if (body.questions.length > 0) {
@@ -186,7 +186,7 @@ module.exports.updateQuestion = (req, res) => {
         answer_three_status: body.answer_three_status,
         answer_four_status: body.answer_four_status,
       };
-      let updateQuestion = await questionsRepo.update({id: body.id},questions)
+      let updateQuestion = await questionsRepo.update({ id: body.id }, questions)
 
       return res.status(200).send({
         status: 200,
@@ -307,31 +307,31 @@ module.exports.examDetails = (req, res) => {
 |------------------------------------------------
 */
 module.exports.deleteExam = (req, res) => {
-  (async () => {
-    let purpose = "Exams Delete";
-    try {
-      let params = req.params;
-      let where = {
-        id: params.id,
-      };
-      let examDelete = await examsRepo.delete(where);
+    (async () => {
+        let purpose = "Exams Delete";
+        try {
+          let params = req.params;
+          let where = {
+            id: params.id,
+          };
+          let examDelete = await examsRepo.delete(where);
 
-      return res.status(200).json({
-        status: 200,
-        msg: responseMessages.examDelete,
-        data: examDelete,
-        purpose: purpose,
-      });
-    } catch (err) {
-      console.log("Exams Delete ERROR : ", err);
-      return res.status(500).send({
-        status: 500,
-        msg: responseMessages.serverError,
-        data: {},
-        purpose: purpose,
-      });
-    }
-  })();
+          return res.status(200).json({
+            status: 200,
+            msg: responseMessages.examDelete,
+            data: examDelete,
+            purpose: purpose,
+          });
+        } catch (err) {
+          console.log("Exams Delete ERROR : ", err);
+          return res.status(500).send({
+            status: 500,
+            msg: responseMessages.serverError,
+            data: {},
+            purpose: purpose,
+          });
+        }
+    })();
 };
 
 /*

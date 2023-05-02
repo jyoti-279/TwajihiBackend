@@ -34,7 +34,10 @@ module.exports.ProfileDetails = (req, res) => {
       try {
         let userID = req.headers.userID;
         let userDetails = await UserRepo.findOne({ id: userID, });
-        console.log(userDetails, "det ################");
+
+        delete userDetails.otp;
+        delete userDetails.otp_expire_time;
+        
         return res.send({
           status: 200,
           msg: ResponseMessages.ProfileDetails,
