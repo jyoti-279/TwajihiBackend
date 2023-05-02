@@ -138,9 +138,7 @@ module.exports.questionsList = (req, res) => {
             }
             let questionsList = await examSettingsRepo.findAll(where);
             //let question = getRandomValues(questionsList.length-1)
-            let question = questionsList.map(value => ({ value, sort: Math.random() }))
-                    .sort((a, b) => a.sort - b.sort)
-                    .map(({ value }) => value);
+           
 
             return res.status(200).json({
                 status: 200,

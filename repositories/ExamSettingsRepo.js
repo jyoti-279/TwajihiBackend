@@ -19,9 +19,7 @@ module.exports.create = (data) => {
 
 module.exports.count = (data) => {
     return new Promise((resolve, reject) => {
-        ExamSettings.count(data,
-            data.limit
-            ).then(result => {
+        ExamSettings.count(data).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
