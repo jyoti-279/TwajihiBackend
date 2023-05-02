@@ -278,7 +278,7 @@ module.exports.listSubCategories = (req, res) => {
         try {
             let queryParam = req.query;
             let where = {
-                category_id: req.params.id
+                category_id: req.params.category_id
             };
             let data = {};
             let page = queryParam.page ? parseInt(queryParam.page) : 1;
@@ -289,7 +289,7 @@ module.exports.listSubCategories = (req, res) => {
        
             return res.status(200).json({
                 status: 200,
-                msg: responseMessages.updateSubCategory,
+                msg: responseMessages.subcategoryList,
                 data: {
                     subCategoryList: subCategoryList.rows,
                     totalCount: subCategoryList.count,
@@ -355,8 +355,8 @@ module.exports.updateSubCategory = (req, res) => {
 | API name          :  uploadCatagoryImage
 | Response          :  Respective response message in JSON format
 | Logic             :  Update Profile Image
-| Request URL       :  BASE_URL/api/update-profile-image
-| Request method    :  PUT
+| Request URL       :  BASE_URL/api/
+| Request method    :  POST
 | Author            :  SAYAN DE
 |------------------------------------------------
 */
@@ -397,6 +397,60 @@ module.exports.uploadCatagoryImage = (req, res) => {
       }
     })();
 };
+
+
+/*
+|------------------------------------------------ 
+| API name          :  uploadSubCatagoryImage
+| Response          :  Respective response message in JSON format
+| Logic             :  uploadSubCatagoryImage
+| Request URL       :  BASE_URL/api/
+| Request method    :  POST
+| Author            :  SAYAN DE
+|------------------------------------------------
+*/
+module.exports.uploadSubCatagoryImage = (req, res) => {
+    (async () => {
+      let purpose = "Sub Catagory Image Upload";
+      try {
+        let queryParam = req.query;
+        let Image;
+        if (req.file) {
+          Image = `${global.constants.subcatagory_image_url}/${req.file.filename}`;
+        }
+        let where = {
+            id: queryParam.id,
+            category_id: queryParam.category_id
+        }
+        console.log(where,"+++++++++++++");
+        let find = await subCategoryRepo.findOneSubCategory(where);
+        console.log(find,"...........");
+        if (find.image != null) {
+        
+        await subCategoryRepo.update({ id: queryParam.id }, { image: Image });
+        
+        } else {
+            let create = {image: Image}
+        await subCategoryRepo.create({ id: queryParam.id }, create);
+        }
+        return res.send({
+          status: 200,
+          msg: ResponseMessages.subcatagoryImageUpload,
+          data: Image,
+          purpose: purpose,
+        });
+      } catch (err) {
+        console.log("Sub Category Image upload ERROR : ", err);
+        return res.send({
+          status: 500,
+          msg: ResponseMessages.serverError,
+          data: {},
+          purpose: purpose,
+        });
+      }
+    })();
+};
+
 
 /*
 |------------------------------------------------ 

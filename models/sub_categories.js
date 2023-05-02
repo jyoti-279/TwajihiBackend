@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   sub_categories.init({
     category_id: DataTypes.STRING,
-    subject_name: DataTypes.STRING
+    subject_name: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'sub_categories',

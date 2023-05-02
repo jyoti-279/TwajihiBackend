@@ -20,9 +20,9 @@ module.exports.create = (data) => {
     })
 }
 
-module.exports.count = (data) => {
+module.exports.count = (where) => {
     return new Promise((resolve, reject) => {
-        User.count(data).then(result => {
+        User.count({where: where}).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {

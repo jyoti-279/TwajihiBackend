@@ -17,6 +17,16 @@ module.exports.findOne = () => {
     })
 }
 
+module.exports.findOneSubCategory = (where,data) => {
+    return new Promise((resolve, reject) => {
+        SubCategory.findOne({where: where}).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
 
 //Create
 module.exports.create = (whereData, t = null) => { 
@@ -72,6 +82,20 @@ module.exports.update = (whereData, data, t = null) => {
 module.exports.findAndCountAll = (whereData, data) => {
     return new Promise((resolve, reject) => {
         SubCategory.findAndCountAll({
+            where: whereData,
+        }).then(result => {
+            result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
+
+module.exports.count = (whereData, data) => {
+    return new Promise((resolve, reject) => {
+        SubCategory.count({
             where: whereData,
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));

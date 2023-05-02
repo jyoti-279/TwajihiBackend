@@ -43,9 +43,13 @@ module.exports.delete = (where) => {
     })
 }
 
-module.exports.findAll = (where) => {
+module.exports.findAll = (where,data) => {
     return new Promise((resolve, reject) => {
-        Exam.findAll({where:where}).then(result => {
+        Exam.findAll({
+            where:where,
+            limit: data.limit,
+        })
+        .then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);
         }).catch((error) => {
