@@ -25,6 +25,8 @@ const sequelize = require('../../config/dbConfig').sequelize;
 // ################################ Response Messages ################################ //
 const responseMessages = require('../../ResponseMessages');
 const exams = require('../../models/exams');
+const { resolve } = require('path');
+const { getRandomValues } = require('crypto');
 
 /*
 |------------------------------------------------ 
@@ -128,17 +130,21 @@ module.exports.questionsList = (req, res) => {
     (async () => {
         let purpose = "Questions List"
         try {
-            let params = req.params;
-
+            let params = req.query;
+            let number = params.question_no;
             let where = {
                 exam_id: params.id
             }
             let questionsList = await questionsRepo.findAll(where);
+            //let question = getRandomValues(questionsList.length-1)
+            let question = questionsList.map(value => ({ value, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map(({ value }) => value);
 
             return res.status(200).json({
                 status: 200,
                 msg: responseMessages.examList,
-                data: questionsList,
+                data: question.splice(0,number) ,
                 purpose: purpose
             })
         } catch (err) {
@@ -392,23 +398,32 @@ module.exports.viewResultList = (req, res) => {
         let purpose = "Views Result List"
         try {
             let userID = req.headers.userID;
-
             let result = [];
+            let ResultPromiseAll = [];
             let examResultList = await examCondutedRepo.findAll({ user_id: userID });
             examResultList.forEach(element =>{
-                result.push({
-                    exam_name: element.Exams.exam_name,
-                    total_questions: element.Exams.total_questions,
-                    time: element.Exams.total_time,
+                result.push(
+                    new Promise(async (resolve, reject) => {
+                        ResultPromiseAll.push({
+                            exam_name: element.exam_details.exam_name,
+                            exam_time: element.exam_details.total_time,
+                            number_of_questions: element.exam_details.total_questions,
+                            marks: element.scored,
+                            date: element.createdAt,
+                            time: element.updatedAt
+                        })
+                        resolve(true);
+                    })
+            )
             })
-            })
-
+            Promise.all(ResultPromiseAll).then(() => {
             return res.status(200).json({
                 status: 200,
                 msg: responseMessages.examResultList,
-                data: result,
+                data: ResultPromiseAll,
                 purpose: purpose
             })
+        })
         } catch (err) {
             console.log("Exams Result List ERROR : ", err);
             return res.status(500).send({

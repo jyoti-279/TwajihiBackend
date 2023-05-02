@@ -55,7 +55,7 @@ router.get('/subcatagory-list/:catagory_id',SettingController.SubCatagoryList);
 // ######################## Take Test #######################
 router.get('/exam-list/:id',AuthenticationMiddleware.authenticateOptionalRequestAPI,validRequest.validate(UserValidation.listUserSchema,'query'),ExamController.examList);
 router.get('/exam-details/:id',AuthenticationMiddleware.authenticateOptionalRequestAPI,ExamController.examDetails);
-router.get('/question-list/:id',AuthenticationMiddleware.authenticateOptionalRequestAPI,ExamController.questionsList);
+router.get('/question-list',AuthenticationMiddleware.authenticateOptionalRequestAPI,ExamController.questionsList);
 router.post('/submit-exam/:id', AuthenticationMiddleware.authenticateOptionalRequestAPI,validRequest.validate(UserValidation.submitExam, 'body'), ExamController.submitExam); // Submit exam
 router.get('/result-details/:id',AuthenticationMiddleware.authenticateOptionalRequestAPI,ExamController.viewResultDetails);
 router.get('/results-list',AuthenticationMiddleware.authenticateRequestAPI,ExamController.viewResultList);

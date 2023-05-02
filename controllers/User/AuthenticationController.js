@@ -1,4 +1,3 @@
-
 /*!
  * AuthenticationController.js
  * Containing all the controller actions related to `User`
@@ -214,7 +213,6 @@ module.exports.forgetPassword = (req, res) => {
                     <table width="100%" border="0" cellspacing="0" cellpadding="0"
                     style="padding:15px 0;text-align: center; background:#ffffff; border-bottom: 1px solid #e2e2e2;">
                     </table>
-                
                     <table width="100%" border="0" cellspacing="0" cellpadding="0"
                     style="padding:60px 40px;text-align: left; background:#fff;">
                     <tr>
