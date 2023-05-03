@@ -35,12 +35,13 @@ module.exports.create = (whereData, t = null) => {
 }
 
 //Find All
-module.exports.findAll = (whereData, data) => {
+module.exports.findAll = (where, data) => {
     return new Promise((resolve, reject) => {
         Questions.findAll({
-            where: whereData,
+            where: where,
             attributes:['id','exam_id','question_name','question_type','answer_one','answer_two','answer_three','answer_four'],
-            
+            limit: data.limit,
+            order: sequelize.random(),
         }).then(result => {
             result = JSON.parse(JSON.stringify(result).replace(/\:null/gi, "\:\"\""));
             resolve(result);

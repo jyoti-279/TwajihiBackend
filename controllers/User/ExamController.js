@@ -131,19 +131,29 @@ module.exports.questionsList = (req, res) => {
     (async () => {
         let purpose = "Questions List"
         try {
-            let params = req.query;
-            let number = params.question_no;
+            let queryParam = req.query;
+           // let number = params.question_no;
+            let data = {};
+            
             let where = {
-                exam_id: params.id
+                exam_id: queryParam.id
             }
-            let questionsList = await examSettingsRepo.findAll(where);
+            
+            let examsettingRequest = await examSettingsRepo.findOne({id : 1});
+            console.log(examsettingRequest,">>>>>>");
+            data.limit = parseInt(examsettingRequest.total_questions)
+            console.log(data.limit,"----------");
+            let questionlist = await questionsRepo.findAll(where,data)
+            console.log(questionlist,"++++++++++");
             //let question = getRandomValues(questionsList.length-1)
-           
+            // let question = questionsList.map(value => ({ value, sort: Math.random() }))
+            //         .sort((a, b) => a.sort - b.sort)
+            //         .map(({ value }) => value);
 
             return res.status(200).json({
                 status: 200,
                 msg: responseMessages.examList,
-                data: question.splice(0,number) ,
+                data: questionlist,
                 purpose: purpose
             })
         } catch (err) {
